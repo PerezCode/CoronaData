@@ -1,0 +1,41 @@
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: #70afc4;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  height: inherit;
+  margin: 0;
+  margin-left: 7%;
+  font-family: sans-serif;
+}
+
+.header-logo--image {
+  height: 90%;
+  margin: 0 10px 0 0;
+}
+
+.header-logo--title {
+  margin: 0;
+  color: white;
+}
+
+.header-menu {
+  width: 20%;
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  /* border: 1px solid red; */
+  margin: 0;
+  padding: 0;
+  margin-right: 7%;
+  font-family: sans-serif;
+  color: white;
+  font-weight: 600;
+}
