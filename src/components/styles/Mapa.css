@@ -1,0 +1,24 @@
+.map-container {
+  width: 100%;
+  height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #9EC7F3;
+  padding: 20px 0;
+}
+
+.map-container__title {
+  font-family: "Lato", sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.map-container__map{
+  width: 900px;
+  height: 500px;
+}
