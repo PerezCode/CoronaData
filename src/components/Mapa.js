@@ -9,7 +9,10 @@ class Mapa extends React.Component {
       // code ISO 3166-1 alpha-2 ejemplo: CO, MX
       countriesCode: [],
       modalIsOpen: {
-        data: {},
+        data: {
+          mapData: null,
+          clickedCountryCode: "",
+        },
         state: false,
       }
     };
@@ -85,7 +88,7 @@ class Mapa extends React.Component {
       //Click event
       window.google.visualization.events.addListener(chart, "regionClick", (r) =>{
         // console.log(r)
-        this.handleOpenModal(r.region);
+        this.handleOpenModal(r.region, data);
       })
     }
 
@@ -93,25 +96,31 @@ class Mapa extends React.Component {
     window.google.charts.setOnLoadCallback(drawRegionsMap);
   };
 
-  handleOpenModal = (code) => {
-    this.setState({modalIsOpen: {
+  handleOpenModal = (code, mapData) => {
+    this.setState({ modalIsOpen: {
       data: {
-        code,
+        clickedCountryCode: code,
+        mapData,
       },
-      state: true}})
+      state: true
+    }})
   }
 
   handleCloseModal = () => {
-    this.setState({ modalIsOpen: false })
+    this.setState({ modalIsOpen: {
+      data: {},
+      state: false
+    }})
   }
+
   render() {
     return (
       <React.Fragment>
-        <div className="map-container">
-          <h2 className="map-container__title">
+        <div id="map-container" className="mapContainer">
+          <h2 className="mapContainer__title">
             Consulta información sobre el COVID-19 en tu país
           </h2>
-          <div className="map-container__map" id="regions_div"></div>
+          <div className="mapContainer__map" id="regions_div"></div>
         </div>
         <Modal
           isOpen={this.state.modalIsOpen.state}
