@@ -3,6 +3,14 @@ import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import firstChart from "../images/lineal.png"
 import secondChart from "../images/torta.png"
+import getCountry from "../fixtures/countries"
+
+async function capital(isoCode) {
+  await getCountry(isoCode).then(e => {
+    //alert(e.capital)
+    return e.capital
+  })
+}
 
 const Modal = (props) => {
   if(props.isOpen){
@@ -65,10 +73,10 @@ const Modal = (props) => {
               <div className="countryData__map">
                 <div id="map-modal"></div>
               </div>
-              <div className="countryData__countryName">{props.data.clickedCountryCode}</div>
-              <div className="countryData__countryCapital">CAPITAL</div>
-              <div className="countryData__countryPopulation">No. De habitantes: 9'657.234</div>
-              <div className="countryData__countryAvailableBeds">Total de camas disponibles: 1.356</div>
+              <div className="countryData__countryName">{props.data.countryData.name}</div>
+              <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
+              <div className="countryData__countryPopulation">No. De habitantes: {props.data.countryData.population}</div>
+              <div className="countryData__countryAvailableBeds">Total de camas disponibles: {props.data.countryData.beds}</div>
             </div>
             <div className="countryFirstChart">
               <div className="countryFirstChart__chart">

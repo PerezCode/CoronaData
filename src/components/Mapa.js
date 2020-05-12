@@ -2,6 +2,10 @@ import React from "react";
 import "./styles/Mapa.css";
 import Modal from "./Modal";
 
+import getCountry from '../fixtures/countries'
+
+
+
 class Mapa extends React.Component {
   constructor(props) {
     super(props);
@@ -88,7 +92,15 @@ class Mapa extends React.Component {
       //Click event
       window.google.visualization.events.addListener(chart, "regionClick", (r) =>{
         // console.log(r)
-        this.handleOpenModal(r.region, data);
+        getCountry(r.region).then(e => {
+          let countryData = {
+            name: e.spanishName,
+            capital: e.capital,
+            population: e.population,
+            beds: e.beds
+          }
+          this.handleOpenModal(r.region, data, countryData);
+        })
       })
     }
 
@@ -96,10 +108,11 @@ class Mapa extends React.Component {
     window.google.charts.setOnLoadCallback(drawRegionsMap);
   };
 
-  handleOpenModal = (code, mapData) => {
+  handleOpenModal = (code, mapData, countryData) => {
     this.setState({ modalIsOpen: {
       data: {
         clickedCountryCode: code,
+        countryData,
         mapData,
       },
       state: true

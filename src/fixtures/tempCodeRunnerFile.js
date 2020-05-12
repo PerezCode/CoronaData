@@ -24,7 +24,7 @@ async function getCountries() {
         })
 } */
 
-export default async function getCountry(isoCode) {
+async function getCountry(isoCode) {
 
     const dataCountry = await fetch(`https://restcountries.eu/rest/v2/alpha/${isoCode}`)
         .then((response) => {
@@ -44,3 +44,7 @@ export default async function getCountry(isoCode) {
 
     return dataCountry
 }
+
+getCountry('mx').then(e => {
+    console.log(e.capital)
+})
