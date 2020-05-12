@@ -3,9 +3,9 @@ const fetch = require("node-fetch");
 //datos de los países de: https://restcountries.eu/
 let countries = [];
 
-function getCountries() {
+async function getCountries() {
 
-    fetch("https://restcountries.eu/rest/v2/all")
+    await fetch("https://restcountries.eu/rest/v2/all")
         .then((response) => {
             return response.json();
         })
@@ -24,9 +24,9 @@ function getCountries() {
         })
 }
 
-function getCountry(isoCode) {
+async function getCountry(isoCode) {
 
-    fetch(`https://restcountries.eu/rest/v2/alpha/${isoCode}`)
+    await fetch(`https://restcountries.eu/rest/v2/alpha/${isoCode}`)
         .then((response) => {
             return response.json()
         })
@@ -41,7 +41,6 @@ function getCountry(isoCode) {
             }
             return respuesta
         })
-
 }
 
 export default {
