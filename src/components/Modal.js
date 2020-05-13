@@ -3,14 +3,6 @@ import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import firstChart from "../images/lineal.png"
 import secondChart from "../images/torta.png"
-import getCountry from "../fixtures/countries"
-
-async function capital(isoCode) {
-  await getCountry(isoCode).then(e => {
-    //alert(e.capital)
-    return e.capital
-  })
-}
 
 const Modal = (props) => {
   if(props.isOpen){
@@ -21,18 +13,18 @@ const Modal = (props) => {
       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
       mapsApiKey: "AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY",
     });
-    
+
     const drawRegionsMap = () => {
-      // Create the data table. 
-      let data = props.data.mapData;
+      // Create the data table.
+      const data = props.data.mapData;
 
       // Instantiate and draw our chart, passing in some options.
-      let chart = new window.google.visualization.GeoChart(
+      const chart = new window.google.visualization.GeoChart(
         document.getElementById("map-modal")
       );
 
       // Set chart options
-      let options = {
+      const options = {
         region: props.data.clickedCountryCode, // Region a enfocar
         colorAxis: { colors: ["#54828D", "#27496E"] }, // Escala de colores
         datalessRegionColor: "gray", // Color de paises sin data
@@ -75,8 +67,12 @@ const Modal = (props) => {
               </div>
               <div className="countryData__countryName">{props.data.countryData.name}</div>
               <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
-              <div className="countryData__countryPopulation">No. De habitantes: {props.data.countryData.population}</div>
-              <div className="countryData__countryAvailableBeds">Total de camas disponibles: {props.data.countryData.beds}</div>
+              <div className="countryData__countryPopulation">
+                No. De habitantes: {props.data.countryData.population}
+              </div>
+              <div className="countryData__countryAvailableBeds">
+                Total de camas disponibles: {props.data.countryData.beds}
+              </div>
             </div>
             <div className="countryFirstChart">
               <div className="countryFirstChart__chart">

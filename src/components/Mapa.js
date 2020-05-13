@@ -1,17 +1,13 @@
 import React from "react";
 import "./styles/Mapa.css";
 import Modal from "./Modal";
-
-import getCountry from '../fixtures/countries'
-
-
+import getCountryData from '../fixtures/countries';
 
 class Mapa extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // code ISO 3166-1 alpha-2 ejemplo: CO, MX
-      countriesCode: [],
+      countriesData: [],
       modalIsOpen: {
         data: {
           mapData: null,
@@ -23,10 +19,6 @@ class Mapa extends React.Component {
   }
 
   componentDidMount = () => {
-    let codeString = "DZ,EG,EH,LY,MA,SD,SS,TN,BF,BJ,CI,CV,GH,GM,GN,GW,LR,ML,MR,NE,NG,SH,SL,SN,TG,AO,CD,ZR,CF,CG,CM,GA,GQ,ST,TD,BI,DJ,ER,ET,KE,KM,MG,MU,MW,MZ,RE,RW,SC,SO,TZ,UG,YT,ZM,ZW,BW,LS,NA,SZ,ZA,GG,JE,AX,DK,EE,FI,FO,GB,IE,IM,IS,LT,LV,NO,SE,SJ,AT,BE,CH,DE,DD,FR,FX,LI,LU,MC,NL,BG,BY,CZ,HU,MD,PL,RO,RU,SU,SK,UA,AD,AL,BA,ES,GI,GR,HR,IT,ME,MK,MT,RS,PT,SI,SM,VA,YU,BM,CA,GL,PM,US,AG,AI,AN,AW,BB,BL,BS,CU,DM,DO,GD,GP,HT,JM,KN,KY,LC,MF,MQ,MS,PR,TC,TT,VC,VG,VI,BZ,CR,GT,HN,MX,NI,PA,SV,AR,BO,BR,CL,CO,EC,FK,GF,GY,PE,PY,SR,UY,VE,TM,TJ,KG,KZ,UZ,CN,HK,JP,KP,KR,MN,MO,TW,AF,BD,BT,IN,IR,LK,MV,NP,PK,BN,ID,KH,LA,MM,BU,MY,PH,SG,TH,TL,TP,VN,AE,AM,AZ,BH,CY,GE,IL,IQ,JO,KW,LB,OM,PS,QA,SA,NT,SY,TR,YE,YD,AU,NF,NZ,FJ,NC,PG,SB,VU,FM,GU,KI,MH,MP,NR,PW,AS,CK,NU,PF,PN,TK,TO,TV,WF,WS"
-    let codesArray = codeString.split(",");
-    this.setState({countriesCode: codesArray});
-
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
       packages: ["geochart"],
@@ -34,10 +26,10 @@ class Mapa extends React.Component {
       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
       mapsApiKey: "AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY",
     });
-    
+
     const drawRegionsMap = () => {
       // Create the data table.
-      let data = window.google.visualization.arrayToDataTable([
+      let dataMap = window.google.visualization.arrayToDataTable([
         ["País", "Total de camillas", "Poblacion"],
         ["US", 100, 10000],
       ]);
@@ -74,32 +66,39 @@ class Mapa extends React.Component {
         },
       };
 
-      const posibleValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-
-      // Dynamic assignment of values ​​to countries
-      const countriesCode = this.state.countriesCode;
-      for (let i = 0; i < countriesCode.length; i++) {
-        const country = countriesCode[i];
-        let totalBeds =
-          posibleValues[Math.round(Math.random() * (9 - 0) + 0)];
-        let population = 2000;
-        // Add data
-        data.addRow([country, totalBeds, population]);
-      }
-      // Draw map
-      chart.draw(data, options);
+      getCountryData.getDataOfAllCountries()
+      .then((response) => {
+        this.setState({countriesData: response}, () => {
+          const countriesData = this.state.countriesData;
+          for(let i = 0; i < countriesData.length; i++){
+            const countryName = countriesData[i].code;
+            const totalBeds = countriesData[i].beds;
+            const population = countriesData[i].population;
+            dataMap.addRow([countryName, totalBeds, population]);
+          }
+        });
+      })
+      .then(()=> {
+        // Draw map
+        chart.draw(dataMap, options);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
 
       //Click event
-      window.google.visualization.events.addListener(chart, "regionClick", (r) =>{
-        // console.log(r)
-        getCountry(r.region).then(e => {
-          let countryData = {
-            name: e.spanishName,
-            capital: e.capital,
-            population: e.population,
-            beds: e.beds
+      window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
+        // region is the country code
+        const countryCode = region;
+        getCountryData.getCountryData(countryCode)
+          .then( countryData => {
+          const usefulCountryData = {
+            name: countryData.spanishName,
+            capital: countryData.capital,
+            population: countryData.population,
+            beds: countryData.beds
           }
-          this.handleOpenModal(r.region, data, countryData);
+          this.handleOpenModal(countryCode, dataMap, usefulCountryData);
         })
       })
     }
