@@ -25,10 +25,10 @@ const Modal = (props) => {
 
       // Set chart options
       const options = {
-        region: props.data.clickedCountryCode, // Region a enfocar
+        region: props.data.countryData.code, // Region a enfocar
         colorAxis: { colors: ["#54828D", "#27496E"] }, // Escala de colores
         datalessRegionColor: "gray", // Color de paises sin data
-        defaultColor: "#f5f5f5", // Color de paises con valor en null
+        defaultColor: "#54828D", // Color de paises con valor en null
         backgroundColor: { fill: "#9EC7F3" },
         legend: {
           textStyle: {
@@ -65,7 +65,7 @@ const Modal = (props) => {
               <div className="countryData__map">
                 <div id="map-modal"></div>
               </div>
-              <div className="countryData__countryName">{props.data.countryData.name}</div>
+              <div className="countryData__countryName">{props.data.countryData.spanishName}</div>
               <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
               <div className="countryData__countryPopulation">
                 No. De habitantes: {props.data.countryData.population}

@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/Mapa.css";
 import Modal from "./Modal";
-import getCountryData from '../fixtures/countries';
+import useGetDataOfAllCountries from "../hooks/useGetDataOfAllCountries";
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -11,7 +11,6 @@ class Mapa extends React.Component {
       modalIsOpen: {
         data: {
           mapData: null,
-          clickedCountryCode: "",
         },
         state: false,
       }
@@ -27,90 +26,74 @@ class Mapa extends React.Component {
       mapsApiKey: "AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY",
     });
 
-    const drawRegionsMap = () => {
-      // Create the data table.
-      let dataMap = window.google.visualization.arrayToDataTable([
-        ["País", "Total de camillas", "Poblacion"],
-        ["US", 100, 10000],
-      ]);
+    const response = useGetDataOfAllCountries()
+    .then((allDataOfCountries) => {
+      this.setState({countriesData: allDataOfCountries}, () => {
+        const drawRegionsMap = () => {
+          // Create the data table.
+          let dataMap = window.google.visualization.arrayToDataTable([
+            ["Code", "nombre"],
+            ["US", "Estados Unidos"],
+          ]);
 
-      // Instantiate and draw our chart, passing in some options.
-      let chart = new window.google.visualization.GeoChart(
-        document.getElementById("regions_div")
-      );
+          // Instantiate and draw our chart, passing in some options.
+          let chart = new window.google.visualization.GeoChart(
+            document.getElementById("regions_div")
+          );
 
-      // Set chart options
-      let options = {
-        region: "world", // Region a enfocar
-        colorAxis: { colors: ["#54828D", "#27496E"] }, // Escala de colores
-        datalessRegionColor: "gray", // Color de paises sin data
-        defaultColor: "#f5f5f5", // Color de paises con valor en null
-        backgroundColor: { fill: "#9EC7F3" },
-        legend: {
-          textStyle: {
-            color: "blue",
-            fontSize: 16,
-            italic: false,
-            bold: false,
-          },
-        },
-        tooltip: {
-          textStyle: {
-            color: "black",
-            fontSize: 17,
-            bold: false,
-            italic: false,
-          },
-          showColorCode: true,
-          trigger: "focus",
-        },
-      };
+          // Set chart options
+          let options = {
+            region: "world", // Region a enfocar
+            colorAxis: { colors: ["#54828D", "#27496E"] }, // Escala de colores
+            datalessRegionColor: "gray", // Color de paises sin data
+            defaultColor: "#54828D", // Color de paises con valor en null
+            backgroundColor: { fill: "#9EC7F3" },
+            legend: {
+              textStyle: {
+                color: "blue",
+                fontSize: 16,
+                italic: false,
+                bold: false,
+              },
+            },
+            tooltip: {
+              textStyle: {
+                color: "black",
+                fontSize: 17,
+                bold: false,
+                italic: false,
+              },
+              showColorCode: true,
+              trigger: "focus",
+            },
+          };
 
-      getCountryData.getDataOfAllCountries()
-      .then((response) => {
-        this.setState({countriesData: response}, () => {
           const countriesData = this.state.countriesData;
           for(let i = 0; i < countriesData.length; i++){
-            const countryName = countriesData[i].code;
-            const totalBeds = countriesData[i].beds;
-            const population = countriesData[i].population;
-            dataMap.addRow([countryName, totalBeds, population]);
+            const countryCode = countriesData[i].code;
+            const countryName = countriesData[i].spanishName;
+            dataMap.addRow([countryCode, countryName]);
           }
-        });
-      })
-      .then(()=> {
-        // Draw map
-        chart.draw(dataMap, options);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+          chart.draw(dataMap, options);
 
-      //Click event
-      window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
-        // region is the country code
-        const countryCode = region;
-        getCountryData.getCountryData(countryCode)
-          .then( countryData => {
-          const usefulCountryData = {
-            name: countryData.spanishName,
-            capital: countryData.capital,
-            population: countryData.population,
-            beds: countryData.beds
-          }
-          this.handleOpenModal(countryCode, dataMap, usefulCountryData);
-        })
-      })
-    }
+          //Click event
+          window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
+            // region is the country code
+            const clickedCountry = this.state.countriesData.filter((country) => (country.code === region));
+            this.handleOpenModal(dataMap, clickedCountry[0]);
+          })
+        }
 
-    // Set a callback to run when the Google Visualization API is loaded.
-    window.google.charts.setOnLoadCallback(drawRegionsMap);
+        // Set a callback to run when the Google Visualization API is loaded.
+        window.google.charts.setOnLoadCallback(drawRegionsMap);
+      })
+    })
+
   };
 
-  handleOpenModal = (code, mapData, countryData) => {
+  handleOpenModal = (mapData, countryData) => {
     this.setState({ modalIsOpen: {
       data: {
-        clickedCountryCode: code,
         countryData,
         mapData,
       },
