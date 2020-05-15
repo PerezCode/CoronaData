@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
-import firstChart from "../images/lineal.png"
 import secondChart from "../images/torta.png"
+import ColumnChart from "./ColumnChart";
 
 const Modal = (props) => {
   if(props.isOpen){
@@ -75,12 +75,10 @@ const Modal = (props) => {
               </div>
             </div>
             <div className="countryFirstChart">
-              <div className="countryFirstChart__chart">
-                <img src={firstChart} alt="firstChart" />
-              </div>
-              <div className="countryFirstChart__description">
-                <p>De cuantas camas dispone el país por tipo de cama</p>
-              </div>
+              <ColumnChart />
+              {/* <div className="countryFirstChart__description">
+                <p>Cantidad de tipos de camas que dispone el país</p>
+              </div> */}
             </div>
             <div className="countrySecondChart">
               <div className="countrySecondChart__chart">

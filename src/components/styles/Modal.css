@@ -93,11 +93,6 @@
   /* background-color: red; */
 }
 
-.countryFirstChart__chart {
-  height: 80%;
-  align-self: center;
-}
-
 .countryFirstChart__chart > img {
   height: 100%;
 }
