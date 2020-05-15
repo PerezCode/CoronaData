@@ -1,0 +1,29 @@
+{
+  "region": "world",
+  "colorAxis": {
+    "colors": ["#54828D", "#27496E"]
+  },
+  "datalessRegionColor": "gray",
+  "defaultColor": "#54828D",
+  "backgroundColor": {
+    "fill": "#9EC7F3"
+  },
+  "legend": {
+    "textStyle": {
+      "color": "blue",
+      "fontSize": 16,
+      "italic": false,
+      "bold": false
+    }
+  },
+  "tooltip": {
+    "textStyle": {
+      "color": "black",
+      "fontSize": 17,
+      "bold": false,
+      "italic": false
+    },
+    "showColorCode": true,
+    "trigger": "focus"
+  }
+}

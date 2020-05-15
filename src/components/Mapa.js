@@ -1,38 +1,16 @@
 import React from "react";
 import "./styles/Mapa.css";
 import Modal from "./Modal";
-import useGetDataOfAllCountries from "../hooks/useGetDataOfAllCountries";
+import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
+import chartOptions from "../fixtures/chartOptions.json"
+import drawMapRegions from "../fixtures/drawMapRegions";
 
 class Mapa extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       countriesData: [],
-      chartOptions: {
-        region: "world", // Region a enfocar
-        colorAxis: { colors: ["#54828D", "#27496E"] }, // Escala de colores
-        datalessRegionColor: "gray", // Color de paises sin data
-        defaultColor: "#54828D", // Color de paises con valor en null
-        backgroundColor: { fill: "#9EC7F3" },
-        legend: {
-          textStyle: {
-            color: "blue",
-            fontSize: 16,
-            italic: false,
-            bold: false,
-          },
-        },
-        tooltip: {
-          textStyle: {
-            color: "black",
-            fontSize: 17,
-            bold: false,
-            italic: false,
-          },
-          showColorCode: true,
-          trigger: "focus",
-        },
-      },
+      chartOptions,
       modalIsOpen: {
         data: {
           mapData: null,
@@ -53,80 +31,18 @@ class Mapa extends React.Component {
 
     // If there is data in memory we use it.
     if(localStorage.getItem("dataOfAllCountries")){
-      console.log("Se está usando la data local");
+      // console.log("Se está usando la data local");
       const savedData = JSON.parse(localStorage.getItem("dataOfAllCountries"))
-      this.setState({countriesData: savedData});
-      const drawRegionsMap = () => {
-        // Create the data table.
-        let dataMap = window.google.visualization.arrayToDataTable([
-          ["code", "name"],
-          ["US", "Estados Unidos"],
-        ]);
-
-        // Instantiate and draw our chart.
-        let chart = new window.google.visualization.GeoChart(
-          document.getElementById("regions_div")
-        );
-
-        // Set chart options
-        let options = this.state.chartOptions;
-
-        // Here we set the useful information for main map.
-        const countriesData = this.state.countriesData;
-        for(let i = 0; i < countriesData.length; i++){
-          const countryCode = countriesData[i].code;
-          const countryName = countriesData[i].spanishName;
-          dataMap.addRow([countryCode, countryName]);
-        }
-        chart.draw(dataMap, options);
-
-        //Click event
-        window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
-          // region is the country code
-          const clickedCountry = this.state.countriesData.filter((country) => (country.code === region));
-          this.handleOpenModal(dataMap, clickedCountry[0]);
-        })
-      }
-      // Set a callback to run when the Google Visualization API is loaded.
-      window.google.charts.setOnLoadCallback(drawRegionsMap);
+      this.setState({countriesData: savedData}, () => {
+        drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
+      });
     } else {
-      console.log("Se pidió data a la api");
-      useGetDataOfAllCountries()
+      // console.log("Se pidió data a la api");
+      getDataOfAllCountries()
       .then((allDataOfCountries) => {
         this.setState({countriesData: allDataOfCountries}, () => {
           localStorage.setItem("dataOfAllCountries", JSON.stringify(allDataOfCountries));
-          const drawRegionsMap = () => {
-            // Create the data table.
-            let dataMap = window.google.visualization.arrayToDataTable([
-              ["Code", "nombre"],
-              ["US", "Estados Unidos"],
-            ]);
-
-            // Instantiate and draw our chart, passing in some options.
-            let chart = new window.google.visualization.GeoChart(
-              document.getElementById("regions_div")
-            );
-
-            // Set chart options
-            let options = this.state.chartOptions;
-
-            const countriesData = this.state.countriesData;
-            for(let i = 0; i < countriesData.length; i++){
-              const countryCode = countriesData[i].code;
-              const countryName = countriesData[i].spanishName;
-              dataMap.addRow([countryCode, countryName]);
-            }
-            chart.draw(dataMap, options);
-
-            //Click event
-            window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
-              // region is the country code
-              const clickedCountry = this.state.countriesData.filter((country) => (country.code === region));
-              this.handleOpenModal(dataMap, clickedCountry[0]);
-            })
-          }
-          // Set a callback to run when the Google Visualization API is loaded.
-          window.google.charts.setOnLoadCallback(drawRegionsMap);
+          drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
         })
       })
     }
