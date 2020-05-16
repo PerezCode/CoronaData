@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
-import secondChart from "../images/torta.png"
+import PieChart from "./PieChart"
 import ColumnChart from "./ColumnChart";
 
 const Modal = (props) => {
@@ -74,19 +74,19 @@ const Modal = (props) => {
                 Total de camas disponibles: {props.data.countryData.beds}
               </div>
             </div>
-            <div className="countryFirstChart">
+            <div className="countryFirstChart zoom">
               <ColumnChart />
               {/* <div className="countryFirstChart__description">
                 <p>Cantidad de tipos de camas que dispone el país</p>
               </div> */}
             </div>
-            <div className="countrySecondChart">
-              <div className="countrySecondChart__chart">
-                <img src={secondChart} alt="secondChart" />
-              </div>
+            <div className="countrySecondChart zoom">
+              <PieChart />
+{/*               <div className="countrySecondChart__chart">
+                <img src=*/}
               <div className="countrySecondChart__description">
-                <p>De cuantas camas dispone el país por porcentaje</p>
-              </div>
+                <p>Porcentaje de camas disponibles por tipo de cama</p>
+              </div> 
             </div>
             <div className="linkToMeasures">
               <div className="linkToMeasures__text">
