@@ -5,6 +5,7 @@ import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
 import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
 import fetchAPI from "../fixtures/fetchAPI";
+import SearchBar from './SearchBar'
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -97,7 +98,8 @@ class Mapa extends React.Component {
           <h2 className="mapContainer__title">
             Consulta información sobre el COVID-19 en tu país
           </h2>
-          <h3 className="mapContainer__subtitle">Clickea sobre cualquier país para conocer mas información</h3>
+          <h3 className="mapContainer__subtitle">Haz click sobre cualquier país para conocer mas información</h3>
+          <div className="searchBar"><SearchBar /></div>
           <div className="mapContainer__map" id="regions_div"></div>
         </div>
         <Modal

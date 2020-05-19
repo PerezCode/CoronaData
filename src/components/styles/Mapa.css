@@ -32,3 +32,28 @@
   width: 900px;
   height: 500px;
 }
+
+.searchBar {
+  display: none;
+}
+
+@media only screen and (max-width: 768px) {
+  .mapContainer__title {
+    font-size: 36px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .mapContainer__subtitle {
+    display: none;
+  }
+
+  .mapContainer__map {
+    display: none;
+  }
+
+  .searchBar {
+    display: flex;
+  }
+}

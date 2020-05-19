@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles/ColumnChart.css'
+import './styles/PieChart.css'
 
 const PieChartContainer = (props) => {
     // Load the visualization API and the piechart package
