@@ -74,13 +74,13 @@ const Modal = (props) => {
                 Total de camas disponibles: {props.data.countryData.beds}
               </div>
             </div>
-            <div className="countryFirstChart zoom">
+            <div className="countryFirstChart">
               <ColumnChart />
-              {/* <div className="countryFirstChart__description">
-                <p>Cantidad de tipos de camas que dispone el país</p>
-              </div> */}
+              <div className="countryFirstChart__description">
+                <p>Cantidad de camas disponibles según su tipo.</p>
+              </div>
             </div>
-            <div className="countrySecondChart zoom">
+            <div className="countrySecondChart">
               <PieChart />
 {/*               <div className="countrySecondChart__chart">
                 <img src=*/}

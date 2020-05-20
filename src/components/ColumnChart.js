@@ -16,7 +16,7 @@ const ColumnChartContainer = (props) => {
     view.setColumns([0, 1, {calc: "stringify", sourceColumn: 1, type: "string", role: "annotation" }, 2, 3]);
 
     var options = {
-      title: "Cantidad de camas disponibles según su tipo. (Use el cursor para ver detalles)",
+      title: "(Use el cursor para ver detalles)",
       width: "100%",
       height: "100%",
       bar: {groupWidth: "70%"},

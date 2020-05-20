@@ -23,30 +23,30 @@ class Mapa extends React.Component {
   }
 
   componentDidMount = () => {
-    fetchAPI()
-    .then(data => {
-      const codigos = [];
-      for (let index = 0; index < data.getCountrys.length; index++) {
-        codigos.push(data.getCountrys[index].code.toUpperCase());
-      }
-      console.log("Codigos que trae la API de Jonattan: " + codigos);
-      let cantidadDeMatchs = 0;
+    // fetchAPI()
+    // .then(data => {
+    //   const codigos = [];
+    //   for (let index = 0; index < data.getCountrys.length; index++) {
+    //     codigos.push(data.getCountrys[index].code.toUpperCase());
+    //   }
+    //   console.log("Codigos que trae la API de Jonattan: " + codigos);
+    //   let cantidadDeMatchs = 0;
 
-      for (let i = 0; i < this.state.countriesData.length; i++) {
-        console.log("Variable i: ")
-        console.log(i)
-        for (let j = 0; j < codigos.length; j++) {
-          console.log("Variable j: ")
-          console.log(j)
-          if(this.state.countriesData[i] === codigos[j]){
-            cantidadDeMatchs += 1;
-            // break;
-          }
-          console.log("holi");
-        }
-      }
-      console.log("Matchs " + cantidadDeMatchs);
-    })
+    //   for (let i = 0; i < this.state.countriesData.length; i++) {
+    //     console.log("Variable i: ")
+    //     console.log(i)
+    //     for (let j = 0; j < codigos.length; j++) {
+    //       console.log("Variable j: ")
+    //       console.log(j)
+    //       if(this.state.countriesData[i] === codigos[j]){
+    //         cantidadDeMatchs += 1;
+    //         // break;
+    //       }
+    //       console.log("holi");
+    //     }
+    //   }
+    //   console.log("Matchs " + cantidadDeMatchs);
+    // })
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
       packages: ["geochart"],

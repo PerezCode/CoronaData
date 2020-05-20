@@ -14,7 +14,6 @@ const main = async () => {
       populationAverage
       estimatedBedsTotal
       estimatedBedsAverage
-      
     }
   }
         `;

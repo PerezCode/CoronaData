@@ -93,15 +93,16 @@
     /* background-color: red; */
 }
 
-.countryFirstChart__chart>img {
-    height: 100%;
+.countrySecondChart__chart {
+    height: 80%;
+    align-self: center;
 }
 
 .countryFirstChart__description {
     padding: 0 20px;
 }
 
-.countryFirstChart__description>p {
+.countryFirstChart__description > p {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
@@ -121,15 +122,11 @@
     align-self: center;
 }
 
-.countrySecondChart__chart>img {
-    height: 100%;
-}
-
 .countrySecondChart__description {
     padding: 0 20px;
 }
 
-.countrySecondChart__description>p {
+.countrySecondChart__description > p {
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
@@ -142,7 +139,7 @@
     /* background-color: chocolate; */
 }
 
-.linkToMeasures__text>p {
+.linkToMeasures__text > p {
     font-family: "Roboto", sans-serif;
     font-size: 25px;
     color: #2196F3;
@@ -171,6 +168,6 @@
     text-align: right;
 }
 
-.dataSource__sourceName>span {
+.dataSource__sourceName > span {
     color: #2196F3;
 }
