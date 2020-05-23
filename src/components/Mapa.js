@@ -23,14 +23,53 @@ class Mapa extends React.Component {
   }
 
   componentDidMount = () => {
-    // fetchAPI()
-    // .then(data => {
-    //   const codigos = [];
-    //   for (let index = 0; index < data.getCountrys.length; index++) {
-    //     codigos.push(data.getCountrys[index].code.toUpperCase());
-    //   }
-    //   console.log("Codigos que trae la API de Jonattan: " + codigos);
-    //   let cantidadDeMatchs = 0;
+
+    const codigosAPI = []
+    let noPaises = 0
+
+    fetchAPI()
+    .then(data => {
+
+      for (let index = 0; index < data.getCountrys.length; index++) {
+        codigosAPI.push(data.getCountrys[index].code.toUpperCase())
+        noPaises++
+      }
+      console.log("Codigos que trae la API de Jonattan: " + codigosAPI)
+    
+      console.log(codigosAPI)
+      console.log(`No de paises: ${noPaises}`)
+      
+      console.log('')
+      console.log('Códigos que hay en la base de datos')
+      console.log('')
+
+      // Los datos de los paíces almacenados en la base de datos
+      let codigosDB = this.state.countriesData
+
+      // De los objetos con los datos de los países, sólo ocupamos los códigos de los países, así que los almacenamos en un nuevo arreglo
+      let onlyCodesDB = codigosDB.map((codigoPais, index, Array) => {
+        return codigoPais.code
+      })
+      console.log(onlyCodesDB)
+      
+      // Aquí vamos a almacenar los códigos de los países que faltan de la API de Jonhatan
+      let codigosFaltantes = []
+
+      for (const pais of onlyCodesDB) {
+        if (!codigosAPI.includes(pais)) {
+          codigosFaltantes.push(pais)
+        }
+      }
+
+      console.log('')
+      console.log('Países que faltan:')
+      console.log('')
+
+      console.log(codigosFaltantes)
+
+    })
+
+      //let cantidadDeMatchs = 0;
 
     //   for (let i = 0; i < this.state.countriesData.length; i++) {
     //     console.log("Variable i: ")
