@@ -101,7 +101,7 @@ const Modal = (props) => {
           </div>
         </div>
       </div>,
-      document.getElementById("map-container"));
+      document.getElementById("mainContainer"));
   } else {
     return null;
   }

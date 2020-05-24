@@ -10,7 +10,7 @@
 .header-logo {
   display: flex;
   align-items: center;
-  height: inherit;
+  height: 100%;
   margin: 0;
   margin-left: 7%;
   font-family: sans-serif;

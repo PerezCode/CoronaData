@@ -136,10 +136,9 @@ class Mapa extends React.Component {
     return (
       <React.Fragment>
         <div id="map-container" className="mapContainer">
-          <h2 className="mapContainer__title">
-            Consulta información sobre el COVID-19 en tu país
-          </h2>
-          <h3 className="mapContainer__subtitle">Haz click sobre cualquier país para conocer mas información</h3>
+          <h3 className="mapContainer__subtitle">
+            Haz click sobre cualquier país para conocer mas información
+          </h3>
           <div className="searchBar"><SearchBar /></div>
           {
             this.state.loading === true

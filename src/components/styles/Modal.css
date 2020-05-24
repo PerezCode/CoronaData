@@ -1,173 +1,174 @@
 .modal {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+	top: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modalCard {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 85%;
-    height: 84%;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 85%;
+  height: 84%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
 }
 
 .modalCard__closeButton {
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    width: 20px;
-    height: 20px;
-    font-size: 12px;
-    font-weight: 700;
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    background-color: #FF7E7E;
-    border: 0;
-    border-radius: 50%;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  background-color: #ff7e7e;
+  border: 0;
+  border-radius: 50%;
 }
 
 .modalCardData {
-    display: grid;
-    grid-template-rows: 60% 1fr 1fr;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-    width: 100%;
-    height: 100%;
-    font-family: "Roboto", sans-serif;
-    color: #46474c;
+  display: grid;
+  grid-template-rows: 60% 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #46474c;
 }
 
 .countryData {
-    grid-column: 1 / 2;
-    grid-row: 1 / 3;
-    /* background-color: blue; */
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  /* background-color: blue; */
 }
 
 .countryData__map {
-    width: 100%;
+  width: 100%;
 }
 
 .countryData__countryName {
-    font-family: "Lato", sans-serif;
-    font-size: 48px;
-    font-weight: 700;
-    color: #212121
+  font-family: "Lato", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #212121;
 }
 
 .countryData__countryCapital {
-    font-family: "Lato", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: #838383;
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #838383;
 }
 
 .countryData__countryPopulation {
-    font-family: "Lato", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: #212121
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #212121;
 }
 
 .countryData__countryAvailableBeds {
-    font-family: "Lato", sans-serif;
-    font-size: 24px;
-    font-weight: 400;
-    color: #212121
+  font-family: "Lato", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #212121;
 }
 
 .countryFirstChart {
-    display: flex;
-    flex-direction: column;
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
-    /* background-color: red; */
+  display: flex;
+  flex-direction: column;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  /* background-color: red; */
 }
 
 .countrySecondChart__chart {
-    height: 80%;
-    align-self: center;
+  height: 80%;
+  align-self: center;
 }
 
 .countryFirstChart__description {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 
 .countryFirstChart__description > p {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    color: #212121;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  color: #212121;
 }
 
 .countrySecondChart {
-    display: flex;
-    flex-direction: column;
-    grid-column: 3 / 4;
-    grid-row: 1 / 2;
-    /* background-color: aqua; */
+  display: flex;
+  flex-direction: column;
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  /* background-color: aqua; */
 }
 
 .countrySecondChart__chart {
-    height: 80%;
-    align-self: center;
+  height: 80%;
+  align-self: center;
 }
 
 .countrySecondChart__description {
-    padding: 0 20px;
+  padding: 0 20px;
 }
 
 .countrySecondChart__description > p {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
-    color: #212121;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  color: #212121;
 }
 
 .linkToMeasures {
-    grid-column: 2 / 4;
-    grid-row: 2 / 3;
-    /* background-color: chocolate; */
+  grid-column: 2 / 4;
+  grid-row: 2 / 3;
+  /* background-color: chocolate; */
 }
 
 .linkToMeasures__text > p {
-    font-family: "Roboto", sans-serif;
-    font-size: 25px;
-    color: #2196F3;
-    text-align: right;
+  font-family: "Roboto", sans-serif;
+  font-size: 25px;
+  color: #2196f3;
+  text-align: right;
 }
 
 .dataSource {
-    grid-column: 2 / 4;
-    grid-row: 3 / 4;
-    /* background-color: teal; */
+  grid-column: 2 / 4;
+  grid-row: 3 / 4;
+  /* background-color: teal; */
 }
 
 .dataSource__info {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 22px;
-    color: #757575;
-    text-align: right;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  color: #757575;
+  text-align: right;
 }
 
 .dataSource__sourceName {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 22px;
-    color: #000000;
-    text-align: right;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 22px;
+  color: #000000;
+  text-align: right;
 }
 
 .dataSource__sourceName > span {
-    color: #2196F3;
+  color: #2196f3;
 }
