@@ -6,6 +6,7 @@ import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
 import fetchAPI from "../fixtures/fetchAPI";
 import SearchBar from './SearchBar'
+import Loader from "./Loader";
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -18,7 +19,8 @@ class Mapa extends React.Component {
           mapData: null,
         },
         state: false
-      }
+      },
+      loading: true
     };
   }
 
@@ -98,14 +100,14 @@ class Mapa extends React.Component {
     if(localStorage.getItem("dataOfAllCountries")){
       // console.log("Se está usando la data local");
       const savedData = JSON.parse(localStorage.getItem("dataOfAllCountries"))
-      this.setState({countriesData: savedData}, () => {
+      this.setState({countriesData: savedData, loading: false}, () => {
         drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
       });
     } else {
       // console.log("Se pidió data a la api");
       getDataOfAllCountries()
       .then((allDataOfCountries) => {
-        this.setState({countriesData: allDataOfCountries}, () => {
+        this.setState({countriesData: allDataOfCountries, loading: false}, () => {
           localStorage.setItem("dataOfAllCountries", JSON.stringify(allDataOfCountries));
           drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
         })
@@ -139,7 +141,11 @@ class Mapa extends React.Component {
           </h2>
           <h3 className="mapContainer__subtitle">Haz click sobre cualquier país para conocer mas información</h3>
           <div className="searchBar"><SearchBar /></div>
-          <div className="mapContainer__map" id="regions_div"></div>
+          {
+            this.state.loading === true
+            ? <Loader />
+            : <div className="mapContainer__map" id="regions_div"></div>
+          }
         </div>
         <Modal
           isOpen={this.state.modalIsOpen.state}
