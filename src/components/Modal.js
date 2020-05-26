@@ -4,6 +4,8 @@ import "./styles/Modal.css";
 import PieChart from "./PieChart"
 import ColumnChart from "./ColumnChart";
 
+import { MdOpenInNew } from "react-icons/md";
+
 const Modal = (props) => {
   if(props.isOpen){
     // Load the Visualization API and the corechart package.
@@ -90,7 +92,7 @@ const Modal = (props) => {
             </div>
             <div className="linkToMeasures">
               <div className="linkToMeasures__text">
-                <p>¿Qué medidas está tomando el país para contrarrestar los posibles efectos del virus?</p>
+                <p>¿Qué medidas está tomando el país para contrarrestar los posibles efectos del virus? <MdOpenInNew /></p>
               </div>
             </div>
             <div className="dataSource">
