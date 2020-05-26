@@ -70,10 +70,10 @@ const Modal = (props) => {
               <div className="countryData__countryName">{props.data.countryData.spanishName}</div>
               <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
               <div className="countryData__countryPopulation">
-                No. De habitantes: {props.data.countryData.population}
+                No. De habitantes: {Intl.NumberFormat().format(props.data.countryData.population)}
               </div>
               <div className="countryData__countryAvailableBeds">
-                Total de camas disponibles: {props.data.countryData.beds}
+                Total de camas disponibles: {Intl.NumberFormat().format(props.data.countryData.beds)}
               </div>
             </div>
             <div className="countryFirstChart">
