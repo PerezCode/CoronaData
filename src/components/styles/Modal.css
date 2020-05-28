@@ -147,6 +147,11 @@
   text-align: right;
 }
 
+.linkToMeasures__text > p:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .dataSource {
   grid-column: 2 / 4;
   grid-row: 3 / 4;

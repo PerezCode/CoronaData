@@ -19,8 +19,10 @@ const Modal = (props) => {
 
     const drawRegionsMap = () => {
       // Create the data table.
-      const data = props.data.mapData;
-
+      const data = window.google.visualization.arrayToDataTable([
+        ["code"],
+        [props.data.countryData.code],
+      ]);
       // Instantiate and draw our chart, passing in some options.
       const chart = new window.google.visualization.GeoChart(
         document.getElementById("map-modal")
@@ -49,7 +51,7 @@ const Modal = (props) => {
             italic: false,
           },
           showColorCode: true,
-          trigger: "focus",
+          trigger: "none",
         },
       };
 
