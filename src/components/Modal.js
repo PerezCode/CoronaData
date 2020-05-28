@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import PieChart from "./PieChart"
 import ColumnChart from "./ColumnChart";
 
+import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
+
 // Iconos importados de react-icon
 import { MdOpenInNew } from "react-icons/md";
 
 const Modal = (props) => {
+
+  const [population, setPopulation] = useState(0)
+
   if(props.isOpen){
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
@@ -58,6 +63,11 @@ const Modal = (props) => {
     }
     // Set a callback to run when the Google Visualization API is loaded.
     window.google.charts.setOnLoadCallback(drawRegionsMap);
+
+    fetchOneCountryAPI(props.data.countryData.code)
+      .then(data => {
+        let beds = data.getCountry.estimatedBedsTotal
+      })
 
     return ReactDOM.createPortal(
       <div className="modal">

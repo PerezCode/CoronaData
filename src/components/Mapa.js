@@ -30,13 +30,14 @@ class Mapa extends React.Component {
     const codigosAPI = []
     let noPaises = 0
 
-    fetchAPI()
+/*     fetchAPI()
       .then(data => {
-        console.log(data.getCountrys[0])
-      })
+        console.log(data.getCountrys)
+      }) */
 
-    fetchOneCountryAPI('mx')
+    fetchOneCountryAPI('us')
       .then(data => {
+        console.log(`Usted imprimió el siguiente país: ${data}`)
         console.log(data);
       })
 
