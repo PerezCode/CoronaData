@@ -6,9 +6,9 @@ const main = async (codeCountry) => {
     console.log(`Este es el codigo que se recibió: ${codeCountry}`);
     console.log(typeof(codeCountry))
 
-    const query = `
-    {
-    getCountry(code: "mx") {
+    const query = /* GraphQL */ `
+    query getCountry($code: String!) {
+      getCountry(code: $code) {
         code
         lat
         lng
@@ -17,38 +17,17 @@ const main = async (codeCountry) => {
         populationAverage
         estimatedBedsTotal
         estimatedBedsAverage
-        typebed {
-            type
-            total
-            percentage
-            population
-            estimatedForPopulation
-            source
-            sourceUrl
-            year
-        }
-        restrictions {
-            dateStart
-            dateEnd
-            description
-            keywords
-            exceptions
-            quantity
-            implementingCities
-            targetCountries
-            targetRegions
-            implementingStates
-        }
-        }
+      }
     }
-`;
+  `
+
     const variables = {
-        code: "co",
+        code: `${codeCountry.toLowerCase()}`,
     };
     const data = await request(endpoint, query, variables);
     return data
     // console.log(JSON.stringify(data, undefined, 2));
 }
-// main().catch((error) => console.error(error));
+// main().catch((error) => console.error(error)); */
 
 export default main;
