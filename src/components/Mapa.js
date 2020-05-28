@@ -5,6 +5,7 @@ import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
 import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
 import fetchAPI from "../fixtures/fetchAPI";
+import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
 import SearchBar from './SearchBar'
 import Loader from "./Loader";
 
@@ -30,6 +31,16 @@ class Mapa extends React.Component {
     let noPaises = 0
 
     fetchAPI()
+      .then(data => {
+        console.log(data.getCountrys[0])
+      })
+
+    fetchOneCountryAPI('mx')
+      .then(data => {
+        console.log(data);
+      })
+
+    /* fetchAPI()
     .then(data => {
 
       for (let index = 0; index < data.getCountrys.length; index++) {
@@ -37,10 +48,10 @@ class Mapa extends React.Component {
         noPaises++
       }
       console.log("Codigos que trae la API de Jonattan: " + codigosAPI)
-    
+
       console.log(codigosAPI)
       console.log(`No de paises: ${noPaises}`)
-      
+
       console.log('')
       console.log('Códigos que hay en la base de datos')
       console.log('')
@@ -53,7 +64,7 @@ class Mapa extends React.Component {
         return codigoPais.code
       })
       console.log(onlyCodesDB)
-      
+
       // Aquí vamos a almacenar los códigos de los países que faltan de la API de Jonhatan
       let codigosFaltantes = []
 
@@ -69,7 +80,7 @@ class Mapa extends React.Component {
 
       console.log(codigosFaltantes)
 
-    })
+    }) */
 
       //let cantidadDeMatchs = 0;
 
