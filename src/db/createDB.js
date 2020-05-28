@@ -4,7 +4,7 @@ var fs = require('fs')
 let codesAndNames = []
 
 async function getData() {
-    return json.map(countries => codesAndNames.push({ code: countries.code, spanishName: countries.spanishName }))
+    return json.map(countries => codesAndNames.push({ code: countries.code, capital: countries.capital, spanishName: countries.spanishName }))
 }
 
 

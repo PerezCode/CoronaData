@@ -4,6 +4,7 @@ import "./styles/Modal.css";
 import PieChart from "./PieChart"
 import ColumnChart from "./ColumnChart";
 
+// Iconos importados de react-icon
 import { MdOpenInNew } from "react-icons/md";
 
 const Modal = (props) => {

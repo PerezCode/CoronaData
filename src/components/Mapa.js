@@ -5,6 +5,7 @@ import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
 import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
 import fetchAPI from "../fixtures/fetchAPI";
+import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
 import SearchBar from './SearchBar'
 import Loader from "./Loader";
 
@@ -30,6 +31,16 @@ class Mapa extends React.Component {
     let noPaises = 0
 
     fetchAPI()
+      .then(data => {
+        console.log(data.getCountrys[0])
+      })
+
+    fetchOneCountryAPI('mx')
+      .then(data => {
+        console.log(data);
+      })
+
+    /* fetchAPI()
     .then(data => {
 
       for (let index = 0; index < data.getCountrys.length; index++) {
@@ -69,7 +80,7 @@ class Mapa extends React.Component {
 
       console.log(codigosFaltantes)
 
-    })
+    }) */
 
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
