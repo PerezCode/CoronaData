@@ -82,23 +82,6 @@ class Mapa extends React.Component {
 
     }) */
 
-      //let cantidadDeMatchs = 0;
-
-    //   for (let i = 0; i < this.state.countriesData.length; i++) {
-    //     console.log("Variable i: ")
-    //     console.log(i)
-    //     for (let j = 0; j < codigos.length; j++) {
-    //       console.log("Variable j: ")
-    //       console.log(j)
-    //       if(this.state.countriesData[i] === codigos[j]){
-    //         cantidadDeMatchs += 1;
-    //         // break;
-    //       }
-    //       console.log("holi");
-    //     }
-    //   }
-    //   console.log("Matchs " + cantidadDeMatchs);
-    // })
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
       packages: ["geochart"],
@@ -146,17 +129,18 @@ class Mapa extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div id="map-container" className="mapContainer">
-          <h3 className="mapContainer__subtitle">
-            Haz click sobre cualquier país para conocer mas información
-          </h3>
-          <div className="searchBar"><SearchBar /></div>
-          {
-            this.state.loading === true
-            ? <Loader />
-            : <div className="mapContainer__map" id="regions_div"></div>
-          }
-        </div>
+        {
+          this.state.loading
+          ? <Loader />
+          :
+          <div id="map-container" className="mapContainer">
+            <h3 className="mapContainer__subtitle">
+              Haz click sobre cualquier país para conocer mas información
+            </h3>
+            <div className="searchBar"><SearchBar /></div>
+            <div className="mapContainer__map" id="regions_div"></div>
+          </div>
+        }
         <Modal
           isOpen={this.state.modalIsOpen.state}
           data={this.state.modalIsOpen.data}
