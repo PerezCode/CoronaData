@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import PieChart from "./PieChart"
@@ -11,7 +11,22 @@ import { MdOpenInNew } from "react-icons/md";
 
 const Modal = (props) => {
 
-  const [population, setPopulation] = useState(0)
+  const [country, setCountry] = useState({})
+
+  useEffect(() => {
+    if (props.data.countryData === undefined) {
+      console.log('No se mandó ningún código de país');
+    } else {
+      console.log(`Se ha mandado el siguiente código: ${props.data.countryData.code}`);
+      fetchOneCountryAPI(props.data.countryData.code)
+        .then(data => {
+          setCountry({
+            population: data.getCountry.populationAverage,
+            beds: data.getCountry.estimatedBedsTotal
+          })
+        })
+    }
+  }, [props.data.countryData])
 
   if(props.isOpen){
     // Load the Visualization API and the corechart package.
@@ -66,11 +81,6 @@ const Modal = (props) => {
     // Set a callback to run when the Google Visualization API is loaded.
     window.google.charts.setOnLoadCallback(drawRegionsMap);
 
-    fetchOneCountryAPI(props.data.countryData.code)
-      .then(data => {
-        let beds = data.getCountry.estimatedBedsTotal
-      })
-
     return ReactDOM.createPortal(
       <div className="modal">
         <div className="modalCard">
@@ -83,10 +93,10 @@ const Modal = (props) => {
               <div className="countryData__countryName">{props.data.countryData.spanishName}</div>
               <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
               <div className="countryData__countryPopulation">
-                No. De habitantes: {Intl.NumberFormat().format(props.data.countryData.population)}
+                No. De habitantes: {Intl.NumberFormat().format(country.population)}
               </div>
               <div className="countryData__countryAvailableBeds">
-                Total de camas disponibles: {Intl.NumberFormat().format(props.data.countryData.beds)}
+                Total de camas disponibles: {Intl.NumberFormat().format(country.beds)}
               </div>
             </div>
             <div className="countryFirstChart">

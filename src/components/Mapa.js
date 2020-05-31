@@ -35,12 +35,6 @@ class Mapa extends React.Component {
         console.log(data.getCountrys)
       }) */
 
-    fetchOneCountryAPI('us')
-      .then(data => {
-        console.log(`Usted imprimió el siguiente país: ${data}`)
-        console.log(data);
-      })
-
     /* fetchAPI()
     .then(data => {
 
