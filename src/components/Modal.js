@@ -21,8 +21,10 @@ const Modal = (props) => {
       fetchOneCountryAPI(props.data.countryData.code)
         .then(data => {
           setCountry({
+            code: data.getCountry.code,
             population: data.getCountry.populationAverage,
-            beds: data.getCountry.estimatedBedsTotal
+            beds: data.getCountry.estimatedBedsTotal,
+            typeBed: data.getCountry.typebed
           })
         })
     }
@@ -100,7 +102,7 @@ const Modal = (props) => {
               </div>
             </div>
             <div className="countryFirstChart">
-              <ColumnChart />
+              <ColumnChart country={country.code}/>
               <div className="countryFirstChart__description">
                 <p>Cantidad de camas disponibles según su tipo.</p>
               </div>

@@ -17,6 +17,28 @@ const main = async (codeCountry) => {
         populationAverage
         estimatedBedsTotal
         estimatedBedsAverage
+        typebed {
+            type
+            total
+            percentage
+            population
+            estimatedForPopulation
+            source
+            sourceUrl
+            year
+        }
+        restrictions {
+            dateStart
+            dateEnd
+            description
+            keywords
+            exceptions
+            quantity
+            implementingCities
+            targetCountries
+            targetRegions
+            implementingStates
+        }
       }
     }
   `

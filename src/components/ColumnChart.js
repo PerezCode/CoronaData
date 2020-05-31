@@ -2,15 +2,19 @@ import React from "react";
 import "./styles/ColumnChart.css";
 
 const ColumnChartContainer = (props) => {
+  console.log(props.country);
+
+  let datos = [
+    ["Tipo de cama", "Cantidad", { role: "style" }, { role: "annotation" }],
+    ["Cama Pequeña", 2, "#b87333", "H"],
+    ["Cama Mediana", 3, "silver", "o"],
+    ["Cama Grande", 4, "gold", "L"],
+    ["Cama Enorme", 5, "color: #e5e4e2", "A"]
+  ]
+
   window.google.charts.load("current", { packages: ["corechart"] });
   const drawChart = () => {
-    var data = window.google.visualization.arrayToDataTable([
-      ["Tipo de cama", "Cantidad", { role: "style" }, { role: "annotation" } ],
-      ["Cama Pequeña", 2, "#b87333", "H"],
-      ["Cama Mediana", 3, "silver", "o"],
-      ["Cama Grande", 4, "gold", "L"],
-      ["Cama Enorme", 5, "color: #e5e4e2", "A"]
-    ]);
+    var data = window.google.visualization.arrayToDataTable(datos);
 
     var view = new window.google.visualization.DataView(data);
     view.setColumns([0, 1, {calc: "stringify", sourceColumn: 1, type: "string", role: "annotation" }, 2, 3]);
