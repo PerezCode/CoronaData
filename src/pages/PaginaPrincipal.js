@@ -9,12 +9,12 @@ const PaginaPrincipal = (props) => {
     <Fragment>
       <Header />
       <Main>
-      <div className="mainContainer" id="mainContainer">
-        <h2 className="mainContainer__title">
-          Consulta información sobre el COVID-19 en tu país
-        </h2>
-        <Mapa />
-      </div>
+        <div className="mainContainer" id="mainContainer">
+          <h2 className="mainContainer__title">
+            Consulta información sobre el COVID-19 en tu país
+          </h2>
+          <Mapa />
+        </div>
       </Main>
     </Fragment>
   );

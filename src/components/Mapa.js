@@ -27,57 +27,8 @@ class Mapa extends React.Component {
 
   componentDidMount = () => {
 
-    const codigosAPI = []
-    let noPaises = 0
-
     myFetch()
       .then((response) => {console.log("La respuesta es:", response)});
-/*     fetchAPI()
-      .then(data => {
-        console.log(data.getCountrys)
-      }) */
-
-    /* fetchAPI()
-    .then(data => {
-
-      for (let index = 0; index < data.getCountrys.length; index++) {
-        codigosAPI.push(data.getCountrys[index].code.toUpperCase())
-        noPaises++
-      }
-      console.log("Codigos que trae la API de Jonattan: " + codigosAPI)
-
-      console.log(codigosAPI)
-      console.log(`No de paises: ${noPaises}`)
-
-      console.log('')
-      console.log('Códigos que hay en la base de datos')
-      console.log('')
-
-      // Los datos de los paíces almacenados en la base de datos
-      let codigosDB = this.state.countriesData
-
-      // De los objetos con los datos de los países, sólo ocupamos los códigos de los países, así que los almacenamos en un nuevo arreglo
-      let onlyCodesDB = codigosDB.map((codigoPais, index, Array) => {
-        return codigoPais.code
-      })
-      console.log(onlyCodesDB)
-
-      // Aquí vamos a almacenar los códigos de los países que faltan de la API de Jonhatan
-      let codigosFaltantes = []
-
-      for (const pais of onlyCodesDB) {
-        if (!codigosAPI.includes(pais)) {
-          codigosFaltantes.push(pais)
-        }
-      }
-
-      console.log('')
-      console.log('Países que faltan:')
-      console.log('')
-
-      console.log(codigosFaltantes)
-
-    }) */
 
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
@@ -90,7 +41,6 @@ class Mapa extends React.Component {
     getDataOfAllCountries()
       .then((allDataOfCountries) => {
         this.setState({countriesData: allDataOfCountries, loading: false}, () => {
-          localStorage.setItem("dataOfAllCountries", JSON.stringify(allDataOfCountries));
           drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
         })
       })

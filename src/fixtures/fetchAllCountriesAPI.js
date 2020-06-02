@@ -6,8 +6,6 @@ const main = async () => {
   const query = /* GraphQL */ `{
     getCountrys{
       code
-      lat
-      lng
       bedsTotal
       bedsAverage
       populationAverage
@@ -35,8 +33,8 @@ const main = async () => {
         targetRegions
         implementingStates
       }
-    }}
-  `
+    }
+  }`
 
   const data = await request(endpoint, query);
   return data
