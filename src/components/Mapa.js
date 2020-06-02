@@ -4,10 +4,10 @@ import Modal from "./Modal";
 import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
 import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
-import fetchAPI from "../fixtures/fetchAPI";
 import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
 import SearchBar from './SearchBar'
 import Loader from "./Loader";
+import myFetch from "../fixtures/fetchAllCountriesAPI";
 
 class Mapa extends React.Component {
   constructor(props) {
@@ -30,6 +30,8 @@ class Mapa extends React.Component {
     const codigosAPI = []
     let noPaises = 0
 
+    myFetch()
+      .then((response) => {console.log("La respuesta es:", response)});
 /*     fetchAPI()
       .then(data => {
         console.log(data.getCountrys)
@@ -85,23 +87,13 @@ class Mapa extends React.Component {
       mapsApiKey: "AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY",
     });
 
-    // If there is data in memory we use it.
-    if(localStorage.getItem("dataOfAllCountries")){
-      // console.log("Se está usando la data local");
-      const savedData = JSON.parse(localStorage.getItem("dataOfAllCountries"))
-      this.setState({countriesData: savedData, loading: false}, () => {
-        drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
-      });
-    } else {
-      // console.log("Se pidió data a la api");
-      getDataOfAllCountries()
+    getDataOfAllCountries()
       .then((allDataOfCountries) => {
         this.setState({countriesData: allDataOfCountries, loading: false}, () => {
           localStorage.setItem("dataOfAllCountries", JSON.stringify(allDataOfCountries));
           drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
         })
       })
-    }
   };
 
   handleOpenModal = (mapData, countryData) => {
