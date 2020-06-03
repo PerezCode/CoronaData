@@ -102,7 +102,7 @@ const Modal = (props) => {
               </div>
             </div>
             <div className="countryFirstChart">
-              <ColumnChart country={country.code}/>
+              <ColumnChart country={country}/>
               <div className="countryFirstChart__description">
                 <p>Cantidad de camas disponibles según su tipo.</p>
               </div>

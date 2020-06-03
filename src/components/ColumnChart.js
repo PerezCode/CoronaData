@@ -1,8 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/ColumnChart.css";
 
 const ColumnChartContainer = (props) => {
-  console.log(props.country);
+  //console.log(props.country);
+
+  const [ beds, setBeds ] = useState([])
+
+/*   let datos = [
+    ["Tipo de cama", "Cantidad", { role: "style" }, { role: "annotation" }]
+  ] */
+
+  let nuevosDatos = []
+
+  useEffect(() => {
+    setBeds(props.country.typeBed)
+
+    if (beds === undefined || null) {
+      console.log('objeto vacio')
+    }else{
+/*       let stringDeTextos = JSON.stringify(beds)
+      console.log('una cadena')
+      console.log(stringDeTextos) */
+      //console.log(props.country.typeBed)
+      if (beds === undefined || null) {
+
+      }else{
+        beds.map(d => {
+          nuevosDatos.push([d.type, parseInt(d.total), '#b87333', 'p'])
+        })
+      }
+
+      console.log(nuevosDatos)
+
+    }
+
+  })
 
   let datos = [
     ["Tipo de cama", "Cantidad", { role: "style" }, { role: "annotation" }],
