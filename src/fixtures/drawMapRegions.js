@@ -1,7 +1,7 @@
-const drawMapRegions = (chartOptions, countriesData, handleOpenModal) => {
+const drawMapRegions = (chartOptions, countriesData, countriesDataAPI, handleOpenModal) => {
   const draw = () => {
     // Create the data table.
-    let dataMap = window.google.visualization.arrayToDataTable([
+    let mapData = window.google.visualization.arrayToDataTable([
       ["code", "name"],
       ["US", "Estados Unidos"],
     ]);
@@ -18,14 +18,15 @@ const drawMapRegions = (chartOptions, countriesData, handleOpenModal) => {
     for(let i = 0; i < countriesData.length; i++){
       const countryCode = countriesData[i].code;
       const countryName = countriesData[i].spanishName;
-      dataMap.addRow([countryCode, countryName]);
+      mapData.addRow([countryCode, countryName]);
     }
-    chart.draw(dataMap, options);
+    chart.draw(mapData, options);
     //Click event
     window.google.visualization.events.addListener(chart, "regionClick", ({ region }) => {
       // region is the country code
-      const clickedCountry = countriesData.filter((country) => (country.code === region));
-      handleOpenModal(dataMap, clickedCountry[0]);
+      const countryData = countriesData.filter((country) => (country.code.toUpperCase() === region));
+      const countryDataAPI = countriesDataAPI.filter((country) => (country.code.toUpperCase() === region));
+      handleOpenModal(mapData, countryData[0], countryDataAPI[0]);
     })
   }
   // Set a callback to run when the Google Visualization API is loaded.

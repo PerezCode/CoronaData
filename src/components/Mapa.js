@@ -29,8 +29,8 @@ class Mapa extends React.Component {
 
     fetchAPI()
       .then((response) => {
-        this.setState({dataToDrawMap: dataBase, loading: false, countriesData: response}, () => {
-          drawMapRegions(this.state.chartOptions, this.state.dataToDrawMap, this.handleOpenModal);
+        this.setState({dataToDrawMap: dataBase, loading: false, countriesData: response.getCountrys}, () => {
+          drawMapRegions(this.state.chartOptions, this.state.dataToDrawMap, this.state.countriesData, this.handleOpenModal);
         })
       });
 
@@ -43,10 +43,11 @@ class Mapa extends React.Component {
     });
   };
 
-  handleOpenModal = (mapData, countryData) => {
+  handleOpenModal = (mapData, countryData, countryDataAPI) => {
     this.setState({ modalIsOpen: {
       data: {
         countryData,
+        countryDataAPI,
         mapData,
       },
       state: true

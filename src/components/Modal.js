@@ -1,36 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
-import PieChart from "./PieChart"
+import PieChart from "./PieChart";
 import ColumnChart from "./ColumnChart";
-
-import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
-
-// Iconos importados de react-icon
-import { MdOpenInNew } from "react-icons/md";
+import { MdOpenInNew } from "react-icons/md"; // Iconos importados de react-icon
 
 const Modal = (props) => {
-
-  const [country, setCountry] = useState({})
-
-  useEffect(() => {
-    if (props.data.countryData === undefined) {
-      console.log('No se mandó ningún código de país');
-    } else {
-      console.log(`Se ha mandado el siguiente código: ${props.data.countryData.code}`);
-      fetchOneCountryAPI(props.data.countryData.code)
-        .then(data => {
-          setCountry({
-            code: data.getCountry.code,
-            population: data.getCountry.populationAverage,
-            beds: data.getCountry.estimatedBedsTotal,
-            typeBed: data.getCountry.typebed,
-            percentage: data.getCountry.percentage
-          })
-        })
-    }
-  }, [props.data.countryData])
-
   if(props.isOpen){
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
@@ -96,25 +71,25 @@ const Modal = (props) => {
               <div className="countryData__countryName">{props.data.countryData.spanishName}</div>
               <div className="countryData__countryCapital">{props.data.countryData.capital}</div>
               <div className="countryData__countryPopulation">
-                No. De habitantes: {Intl.NumberFormat().format(country.population)}
+                Población aproximada: {Intl.NumberFormat().format(props.data.countryDataAPI.populationAverage)}
               </div>
               <div className="countryData__countryAvailableBeds">
-                Total de camas disponibles: {Intl.NumberFormat().format(country.beds)}
+                Cantidad estimada de camas disponibles: {Intl.NumberFormat().format(props.data.countryDataAPI.estimatedBedsTotal)}
               </div>
             </div>
             <div className="countryFirstChart">
-              <ColumnChart country={country}/>
+              <ColumnChart country={props.data.countryDataAPI}/>
               <div className="countryFirstChart__description">
                 <p>Cantidad de camas disponibles según su tipo.</p>
               </div>
             </div>
             <div className="countrySecondChart">
-              <PieChart country={country}/>
+              <PieChart country={props.data.countryDataAPI}/>
 {/*               <div className="countrySecondChart__chart">
                 <img src=*/}
               <div className="countrySecondChart__description">
                 <p>Porcentaje de camas disponibles por tipo de cama</p>
-              </div> 
+              </div>
             </div>
             <div className="linkToMeasures">
               <div className="linkToMeasures__text">
