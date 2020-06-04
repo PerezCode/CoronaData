@@ -1,18 +1,18 @@
 import React from "react";
 import "./styles/Mapa.css";
 import Modal from "./Modal";
-import getDataOfAllCountries from "../fixtures/getDataOfAllCountries";
 import chartOptions from "../fixtures/chartOptions.json"
 import drawMapRegions from "../fixtures/drawMapRegions";
-import fetchOneCountryAPI from "../fixtures/fetchOneCountryAPI"
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar';
 import Loader from "./Loader";
-import myFetch from "../fixtures/fetchAllCountriesAPI";
+import fetchAPI from "../fixtures/fetchAllCountriesAPI";
+import dataBase from "../db/codesAndNamesDB.json";
 
 class Mapa extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      dataToDrawMap: [],
       countriesData: [],
       chartOptions,
       modalIsOpen: {
@@ -27,8 +27,12 @@ class Mapa extends React.Component {
 
   componentDidMount = () => {
 
-    myFetch()
-      .then((response) => {console.log("La respuesta es:", response)});
+    fetchAPI()
+      .then((response) => {
+        this.setState({dataToDrawMap: dataBase, loading: false, countriesData: response}, () => {
+          drawMapRegions(this.state.chartOptions, this.state.dataToDrawMap, this.handleOpenModal);
+        })
+      });
 
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
@@ -37,13 +41,6 @@ class Mapa extends React.Component {
       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
       mapsApiKey: "AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY",
     });
-
-    getDataOfAllCountries()
-      .then((allDataOfCountries) => {
-        this.setState({countriesData: allDataOfCountries, loading: false}, () => {
-          drawMapRegions(this.state.chartOptions, this.state.countriesData, this.handleOpenModal);
-        })
-      })
   };
 
   handleOpenModal = (mapData, countryData) => {
