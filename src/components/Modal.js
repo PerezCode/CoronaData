@@ -24,7 +24,8 @@ const Modal = (props) => {
             code: data.getCountry.code,
             population: data.getCountry.populationAverage,
             beds: data.getCountry.estimatedBedsTotal,
-            typeBed: data.getCountry.typebed
+            typeBed: data.getCountry.typebed,
+            percentage: data.getCountry.percentage
           })
         })
     }
@@ -108,7 +109,7 @@ const Modal = (props) => {
               </div>
             </div>
             <div className="countrySecondChart">
-              <PieChart />
+              <PieChart country={country}/>
 {/*               <div className="countrySecondChart__chart">
                 <img src=*/}
               <div className="countrySecondChart__description">

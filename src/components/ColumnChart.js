@@ -9,20 +9,19 @@ const ColumnChartContainer = (props) => {
     ["Tipo de cama", "Cantidad", { role: "style" }, { role: "annotation" }],
   ]
 
-
   useEffect(() => {
     
     setBeds(props.country.typeBed)
 
     if (beds === undefined || null) {
-      console.log('objeto vacio')
+      console.log('objeto vacio, columnChart')
     }else{
 
       if (beds === undefined || null) {
 
       }else{
         beds.map(d => {
-          datos.push([d.type, parseInt(d.total), "#b87333", ""])
+          datos.push([d.type, parseInt(d.total), "#2196F3", ""])
         })
 
         draw(datos)
