@@ -1,14 +1,15 @@
 import React from 'react'
 import './styles/SearchBar.css'
+import { MdSearch } from "react-icons/md";
 
 const SearchBar = (props) => {
     return (
         <section className="main-input">
             <div className="main-input-container">
-                <span className="searchIcon">
-
-                </span>
-                <input type="text" />
+                <div className="searchIcon">
+                    <MdSearch size={24}/>
+                </div>
+            <input type="text" />
             </div>
         </section>
     )

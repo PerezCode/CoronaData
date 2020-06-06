@@ -47,5 +47,6 @@
 
   .searchBar {
     display: flex;
+    margin-top: 136px;
   }
 }
