@@ -1,3 +1,5 @@
+import swal from "sweetalert";
+
 const drawMapRegions = (chartOptions, countriesData, countriesDataAPI, handleOpenModal) => {
   const draw = () => {
     // Create the data table.
@@ -26,7 +28,17 @@ const drawMapRegions = (chartOptions, countriesData, countriesDataAPI, handleOpe
       // region is the country code
       const countryData = countriesData.filter((country) => (country.code.toUpperCase() === region));
       const countryDataAPI = countriesDataAPI.filter((country) => (country.code.toUpperCase() === region));
-      handleOpenModal(mapData, countryData[0], countryDataAPI[0]);
+      if (countryDataAPI[0] === undefined) {
+        swal({
+          title: "oouch!",
+          text: "No tenemos datos registrados sobre este país :(",
+          icon: "error",
+          button: "Volver al mapa!",
+        })
+      }else{
+        handleOpenModal(mapData, countryData[0], countryDataAPI[0]);
+      }
+      
     })
   }
   // Set a callback to run when the Google Visualization API is loaded.
