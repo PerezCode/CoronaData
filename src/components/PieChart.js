@@ -4,11 +4,6 @@ import './styles/PieChart.css'
 const PieChartContainer = (props) => {
 	const [ beds, setBeds ] = useState([])
 
-  // ["Psiquiatricas", 300],
-	// ["Ortopédicas", 100],
-	// ["Geriátricas", 200],
-	// ["Otros", 400],
-
 	let datos = [];
 
 	useEffect(() => {

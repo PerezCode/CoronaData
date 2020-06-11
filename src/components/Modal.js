@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import PieChart from "./PieChart";
 import ColumnChart from "./ColumnChart";
+import Measures from "./Measures"
 import { MdOpenInNew } from "react-icons/md"; // Iconos importados de react-icon
 
 const Modal = (props) => {
@@ -77,6 +78,9 @@ const Modal = (props) => {
                 Cantidad estimada de camas disponibles: {Intl.NumberFormat().format(props.data.countryDataAPI.estimatedBedsTotal)}
               </div>
             </div>
+{/*             <div className="measures">
+              <Measures country={props.data.countryDataAPI}/>
+            </div> */}
             <div className="countryFirstChart">
               <ColumnChart country={props.data.countryDataAPI}/>
               <div className="countryFirstChart__description">
@@ -85,8 +89,6 @@ const Modal = (props) => {
             </div>
             <div className="countrySecondChart">
               <PieChart country={props.data.countryDataAPI}/>
-{/*               <div className="countrySecondChart__chart">
-                <img src=*/}
               <div className="countrySecondChart__description">
                 <p>Porcentaje de camas disponibles por tipo de cama</p>
               </div>
