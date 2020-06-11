@@ -1,13 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./styles/Modal.css";
 import PieChart from "./PieChart";
 import ColumnChart from "./ColumnChart";
 import Measures from "./Measures"
-import { MdOpenInNew } from "react-icons/md"; // Iconos importados de react-icon
+import { MdOpenInNew, MdArrowBack } from "react-icons/md"; // Iconos importados de react-icon
 
 const Modal = (props) => {
+
+  let [countryMeasures, setCountryMeasures] = useState(true)
+
+  function handleClick(e) {
+    if (countryMeasures) {
+      setCountryMeasures(false)
+    }else{
+      setCountryMeasures(true)
+    }
+  }
+
   if(props.isOpen){
+
     // Load the Visualization API and the corechart package.
     window.google.charts.load("current", {
       packages: ["geochart"],
@@ -78,26 +90,36 @@ const Modal = (props) => {
                 Cantidad estimada de camas disponibles: {Intl.NumberFormat().format(props.data.countryDataAPI.estimatedBedsTotal)}
               </div>
             </div>
-{/*             <div className="measures">
-              <Measures country={props.data.countryDataAPI}/>
-            </div> */}
-            <div className="countryFirstChart">
-              <ColumnChart country={props.data.countryDataAPI}/>
-              <div className="countryFirstChart__description">
-                <p>Cantidad de camas disponibles según su tipo.</p>
+            {
+              countryMeasures ? 
+              <div className="countryFirstChart__container">
+                <div className="countryFirstChart">
+                  <ColumnChart country={props.data.countryDataAPI} />
+                  <div className="countryFirstChart__description">
+                    <p>Cantidad de camas disponibles según su tipo.</p>
+                  </div>
+                </div>
+                <div className="countrySecondChart">
+                  <PieChart country={props.data.countryDataAPI} />
+                  <div className="countrySecondChart__description">
+                    <p>Porcentaje de camas disponibles por tipo de cama</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="countrySecondChart">
-              <PieChart country={props.data.countryDataAPI}/>
-              <div className="countrySecondChart__description">
-                <p>Porcentaje de camas disponibles por tipo de cama</p>
+              :
+              <div className="countryData__measures">
+                  <Measures country={props.data.countryDataAPI} />
               </div>
-            </div>
-            <div className="linkToMeasures">
-              <div className="linkToMeasures__text">
-                <p>¿Qué medidas está tomando el país para contrarrestar los posibles efectos del virus? <MdOpenInNew /></p>
-              </div>
-            </div>
+            }
+            {
+              countryMeasures ? 
+                <div className="linkToMeasures">
+                  <div className="linkToMeasures__text">
+                    <p onClick={handleClick}>¿Qué medidas está tomando el país para contrarrestar los posibles efectos del virus? <MdOpenInNew /></p>
+                  </div>
+                </div> : 
+                <MdArrowBack onClick={handleClick} size="32px" className="linkToMeasures__arrowBack"/>
+            }
             <div className="dataSource">
               <p className="dataSource__info">Medidas de escala por cada 1,000 habitantes</p>
               <p className="dataSource__sourceName">Fuente: <span>Página de la fuente</span></p>
