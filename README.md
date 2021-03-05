@@ -22,7 +22,7 @@ Este proyecto está bajo la licencia MIT
 
 ### Documento del diseño
 ![CoronaData project](https://assets-juanjosemayorga-website.s3.amazonaws.com/projects/corona-data-info.png)
-- [Link al documento](https://xd.adobe.com/view/786fc76f-6d11-461e-bc77-1a16e3701332-2d3c/?fullscreen)
+- [Link al documento del diseño](https://xd.adobe.com/view/786fc76f-6d11-461e-bc77-1a16e3701332-2d3c/?fullscreen)
 
 ### Agradecimientos
 
